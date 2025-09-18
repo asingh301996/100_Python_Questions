@@ -147,30 +147,234 @@ asyncio.run(async_function())
 # that can perform other tasks while waiting for I/O operations or other long-running tasks to finish. without blocking the main thread.
 # The asyncio library provides tools for working with asynchronous code in Python.    '''  
 
-'''DELETE & REMOVE() '''
+'''16. DELETE & REMOVE() '''
 # delete() --> used with index
 # remove() --> used with value
 my_list = [10, 20, 30, 40, 50]
+
 # Using del to remove an element by index
 del my_list[2]  # Removes the element at index 2 (30)
 print("After del:", my_list)  # Output: [10, 20, 40, 50]
+
 # Using remove() to remove an element by value
 my_list.remove(40)  # Removes the first occurrence of the value 40
 print("After remove():", my_list)  # Output: [10, 20, 50]
+
 # Note: If the value to be removed is not found, remove() will raise a ValueError.
 # del can also be used to delete variables or slices of a list. 
 # For example:
 a = 10
 del a  # Deletes the variable 'a'
 # print(a)  # This will raise a NameError since 'a' is deleted
+
 my_list = [10, 20, 30, 40, 50]
 del my_list[1:3]  # Removes elements from index 1 to 2
 print("After del slice:", my_list)  # Output: [10, 40, 50]
 # In summary, use del when you know the index of the element you want to remove,
 # and use remove() when you know the value of the element you want to remove.   
 
- 
+'''17. Diff B/W FOR & WHILE LOOP'''
+# For Loop
+for i in range(5):
+    print(i)  # Output: 0, 1, 2, 3, 4
+''' FOR looop works well with lists, strings and ranges'''
 
 
+# While Loop   
+''' While Loop is when unknown about the number of iterations'''
+count = 0
+while count < 5:
+    print(count)  # Output: 0, 1, 2, 3, 4
+    count += 1
 
+
+'''18. CONDITIONAL STATEMENT IN PYTHON'''
+x = 10
+if x > 0:
+    print("Positive")
+elif x == 0:
+    print("Zero")
+else:
+    print("Negative") 
+
+
+'''19. BREAK, CONTINUE, PASS'''
+# Break - stops loop entirely & Exits the loop
+for i in range(10):
+    if i == 5:
+        break  # Exit the loop when i is 5
+    print(i)  # Output: 0, 1, 2, 3, 4
+
+# Continue - skips current iteration & continues with next iteration
+for i in range(10):
+    if i % 2 == 0:
+        continue  # Skip even numbers
+    print(i)  # Output: 1, 3, 5, 7, 9
+
+# Pass - does nothing, used as a placeholder
+for i in range(5):
+    if i == 3:
+        pass  # Placeholder, does nothing
+    print(i)  # Output: 0, 1, 2, 3, 4
+
+
+'''20.  Python LISTS usage'''
+my_list = [1, 2, 3, 4, 5]
+
+# Accessing elements
+print(my_list[0])  # Output: 1
+
+# Modifying elements
+my_list[1] = 20
+print(my_list)  # Output: [1, 20, 3, 4, 5]
+
+# Adding elements
+my_list.append(6)
+print(my_list)   # Output  : [1, 20, 3, 4 , 5, 6]
+
+# Removing elements
+my_list.remove(3)
+print(my_list)  # Output: [1, 20, 4, 5, 6]  
+
+# Slicing
+print(my_list[1:4])  # Output: [20, 4, 5]
+# Iterating
+for item in my_list:
+    print(item) # Output: 1, 20, 4, 5, 6
+
+# List comprehension
+squared = [x**2 for x in my_list]
+print(squared)  # Output: [1, 400, 16, 25, 36]  
+
+# Length of list
+print(len(my_list))  # Output: 5
+
+# Check if element exists    
+print(20 in my_list)  # Output: True
+
+# Clear the list
+my_list.clear()
+print(my_list)  # Output: []  # Output: []  
+
+# Nested lists
+nested_list = [[1, 2], [3, 4], [5, 6]]
+print(nested_list[1][0])  # Output: 3   # Output: 3
+
+# Copying a list
+copy_list = my_list.copy()
+print(copy_list)  # Output: []  # Output: []
+
+# Extending a list
+my_list.extend([7, 8, 9])
+print(my_list)  # Output: [7, 8, 9]  # Output: [7, 8, 9]
+
+# Reversing a list
+my_list.reverse()
+print(my_list)  # Output: [9, 8, 7]
+
+# Sorting a list
+my_list.sort()      
+print(my_list)  # Output: [7, 8, 9]  # Output: [7, 8, 9]
+
+# Finding the index of an element
+index = my_list.index(8)
+print(index)  # Output: 1  # Output: 1
+
+# Counting occurrences of an element
+count = my_list.count(7)
+print(count)  # Output: 1  # Output: 1
+
+# Inserting an element at a specific position
+my_list.insert(1, 10)
+print(my_list)  # Output: [7, 10, 8, 9]  # Output: [7, 10, 8, 9]
+
+# Pop an element from the list
+popped_element = my_list.pop()
+print(popped_element)  # Output: 9  # Output: 9
+print(my_list)  # Output: [7, 10, 8]  # Output: [7, 10, 8]
+
+# Finding the maximum and minimum values
+max_value = max(my_list)
+min_value = min(my_list)
+print(max_value, min_value)  # Output: 10 7  # Output: 10 7
+
+# Summing all elements in the list      
+total = sum(my_list)
+print(total)  # Output: 25  # Output: 25
+
+# Converting a list to a string
+list_as_string = ', '.join(map(str, my_list))
+print(list_as_string)  # Output: "7, 10, 8"  # Output: "7, 10, 8"
+
+# Converting a string to a list
+string_as_list = list_as_string.split(', ')
+print(string_as_list)  # Output: ['7', '10', '8']  # Output: ['7', '10', '8']
+
+# List comprehension with condition
+even_numbers = [x for x in my_list if x % 2 == 0]
+print(even_numbers)  # Output: [10, 8]  # Output: [10, 8]
+
+# Nested list comprehension
+flattened = [num for sublist in nested_list for num in sublist]
+print(flattened)  # Output: [1, 2, 3, 4, 5, 6]  # Output: [1, 2, 3, 4, 5, 6]
+
+# Using enumerate to get index and value
+for index, value in enumerate(my_list):
+    print(index, value)
+# Output: 0 7, 1 10, 2 8
+
+# Using zip to combine two lists
+list1 = [1, 2, 3] 
+list2 = ['a', 'b', 'c']
+zipped = list(zip(list1, list2))
+print(zipped)  # Output: [(1, 'a'), (2, 'b'), (3, 'c')]  # Output: [(1, 'a'), (2, 'b'), (3, 'c')]
+
+# List comprehension with function
+def square(x):
+    return x * x
+squared_with_func = [square(x) for x in my_list]
+print(squared_with_func)  # Output: [49, 100, 64]  # Output: [49, 100, 64]
+
+# Using filter to filter elements
+filtered = list(filter(lambda x: x > 8, my_list))
+print(filtered)  # Output: [10]  # Output: [10]
+
+# Using map to apply a function to all elements
+mapped = list(map(lambda x: x * 2, my_list))
+print(mapped)  # Output: [14, 20, 16]  # Output: [14, 20, 16]
+
+'''List comprehension with multiple conditions '''  
+# Find numbers that are even and greater than 7
+complex_condition = [x for x in my_list if x % 2 == 0 and x > 7]
+print(complex_condition)  # Output: [10, 8]  # Output: [10, 8]
+# Using any() and all()
+any_greater_than_9 = any(x > 9 for x in my_list)
+all_greater_than_5 = all(x > 5 for x in my_list)
+print(any_greater_than_9, all_greater_than_5)  # Output: True True  # Output: True True
+# Using list comprehension to create a list of tuples
+tuples_list = [(x, x**2) for x in my_list]
+print(tuples_list)  # Output: [(7, 49), (10, 100), (8, 64)]  # Output: [(7, 49), (10, 100), (8, 64)]
+# Using list comprehension to flatten a nested list
+flattened_list = [item for sublist in nested_list for item in sublist]
+print(flattened_list)  # Output: [1, 2, 3, 4, 5, 6]  # Output: [1, 2, 3, 4, 5, 6]
+# Using list comprehension to create a list of characters from a string
+string = "hello"
+char_list = [char for char in string]
+print(char_list)  # Output: ['h', 'e', 'l', 'l', 'o']  # Output: ['h', 'e', 'l', 'l', 'o']
+# Using list comprehension to create a list of ASCII values of characters in a string
+ascii_values = [ord(char) for char in string]
+print(ascii_values)  # Output: [104, 101, 108, 108, 111]  # Output: [104, 101, 108, 108, 111]
+# Using list comprehension to create a list of even squares
+even_squares = [x**2 for x in range(10) if x % 2 == 0]
+print(even_squares)  # Output: [0, 4, 16, 36, 64]  # Output: [0, 4, 16, 36, 64]
+# Using list comprehension to create a list of words with more than 3 letters
+words = ["apple", "is", "a", "fruit"]
+long_words = [word for word in words if len(word) > 3]
+print(long_words)  # Output: ['apple', 'fruit']  # Output: ['apple', 'fruit']
+# Using list comprehension to create a list of tuples with index and value 
+indexed_list = [(index, value) for index, value in enumerate(my_list)]
+print(indexed_list)  # Output: [(0, 7), (1, 10), (2, 8)]  # Output: [(0, 7), (1, 10), (2, 8)]
+# Using list comprehension to create a list of unique elements
+unique_elements = list(set(my_list))
+print(unique_elements)  # Output: [7, 8, 10]
 
