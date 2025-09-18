@@ -242,7 +242,11 @@ print(my_list[1:4])  # Output: [20, 4, 5]
 for item in my_list:
     print(item) # Output: 1, 20, 4, 5, 6
 
-# List comprehension
+# List comprehension - 
+'''my_list is an existing list, e.g. [1, 20, 4, 5, 6].
+x**2 means "take each item x from my_list and square it".
+for x in my_list means "do this for every item in my_list".
+The whole thing [x**2 for x in my_list] creates a new list of squared values.'''
 squared = [x**2 for x in my_list]
 print(squared)  # Output: [1, 400, 16, 25, 36]  
 
