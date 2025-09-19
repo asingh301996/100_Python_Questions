@@ -45,7 +45,7 @@ def multiply_all(**kwargs):
     for value in kwargs.values(): #{1st value=2, 2nd value=3, 3rd value=4}
         result *= value
     return result
-print(multiply_all(a=2,b=3,c=4)) ''' this will create a dict -> {'a':2,'b':3,'c':4 }--> kwargs is a dictionary   ''' 
+print(multiply_all(a=2,b=3,c=4)) # this will create a dict -> {'a':2,'b':3,'c':4 }--> kwargs is a dictionary 
 
 #5. Positional-only arguments (Python 3.8+)
 def pos_only(a, b, /):
@@ -266,7 +266,7 @@ print(nested_list[1][0])  # Output: 3   # Output: 3
 
 # Copying a list
 copy_list = my_list.copy()
-print(copy_list)  # Output: []  # Output: []
+print(copy_list)  # Output: [] 
 
 # Extending a list
 my_list.extend([7, 8, 9])
@@ -348,37 +348,261 @@ mapped = list(map(lambda x: x * 2, my_list))
 print(mapped)  # Output: [14, 20, 16]  # Output: [14, 20, 16]
 
 '''List comprehension with multiple conditions '''  
+
 # Find numbers that are even and greater than 7
 complex_condition = [x for x in my_list if x % 2 == 0 and x > 7]
 print(complex_condition)  # Output: [10, 8]  # Output: [10, 8]
+
 # Using any() and all()
 any_greater_than_9 = any(x > 9 for x in my_list)
 all_greater_than_5 = all(x > 5 for x in my_list)
-print(any_greater_than_9, all_greater_than_5)  # Output: True True  # Output: True True
+print(any_greater_than_9, all_greater_than_5)  # Output: True True  
+
 # Using list comprehension to create a list of tuples
 tuples_list = [(x, x**2) for x in my_list]
 print(tuples_list)  # Output: [(7, 49), (10, 100), (8, 64)]  # Output: [(7, 49), (10, 100), (8, 64)]
+
 # Using list comprehension to flatten a nested list
 flattened_list = [item for sublist in nested_list for item in sublist]
 print(flattened_list)  # Output: [1, 2, 3, 4, 5, 6]  # Output: [1, 2, 3, 4, 5, 6]
+
 # Using list comprehension to create a list of characters from a string
 string = "hello"
 char_list = [char for char in string]
 print(char_list)  # Output: ['h', 'e', 'l', 'l', 'o']  # Output: ['h', 'e', 'l', 'l', 'o']
+
 # Using list comprehension to create a list of ASCII values of characters in a string
 ascii_values = [ord(char) for char in string]
 print(ascii_values)  # Output: [104, 101, 108, 108, 111]  # Output: [104, 101, 108, 108, 111]
+
 # Using list comprehension to create a list of even squares
 even_squares = [x**2 for x in range(10) if x % 2 == 0]
 print(even_squares)  # Output: [0, 4, 16, 36, 64]  # Output: [0, 4, 16, 36, 64]
+
 # Using list comprehension to create a list of words with more than 3 letters
 words = ["apple", "is", "a", "fruit"]
 long_words = [word for word in words if len(word) > 3]
 print(long_words)  # Output: ['apple', 'fruit']  # Output: ['apple', 'fruit']
+
 # Using list comprehension to create a list of tuples with index and value 
 indexed_list = [(index, value) for index, value in enumerate(my_list)]
 print(indexed_list)  # Output: [(0, 7), (1, 10), (2, 8)]  # Output: [(0, 7), (1, 10), (2, 8)]
+
 # Using list comprehension to create a list of unique elements
 unique_elements = list(set(my_list))
 print(unique_elements)  # Output: [7, 8, 10]
+
+'''21. SETS'''
+'''# Sets are unordered collections of unique elements.
+# They are defined using curly braces {} or the set() function.
+# Sets do not allow duplicate values and do not maintain any specific order.
+# Sets are mutable, meaning you can add or remove elements after creation.
+# Common operations on sets include union, intersection, difference, and symmetric difference.
+# Sets are useful for membership testing, removing duplicates from a list, and performing mathematical set operations'''
+
+my_set= {1,2,3}
+print(my_set)  # Output: {1, 2, 3}  
+
+my_set.add(4)
+print(my_set)  # Output: {1, 2, 3, 4}
+
+my_set.remove(2)
+print(my_set)  # Output: {1, 3, 4}    
+
+my_set.discard(5)  # Does not raise an error if 5 is not found
+print(my_set)  # Output: {1, 3, 4}
+
+print(3 in my_set)  # Output: True
+print(len(my_set))  # Output: 3
+
+another_set = {3, 4, 5}
+print(my_set.union(another_set))  # Output: {1, 3, 4, 5}
+
+print(my_set.intersection(another_set))  # Output: {3, 4}
+
+print(my_set.difference(another_set))  # Output: {1}
+
+print(my_set.symmetric_difference(another_set))  # Output: {1, 5}
+my_set.clear()
+
+print(my_set)  # Output: set()
+
+# Set comprehension
+squared_set = {x**2 for x in range(5)}
+print(squared_set)  # Output: {0, 1, 4, 9, 16}
+
+# Frozenset - immutable version of set
+frozen = frozenset([1, 2, 3])
+print(frozen)  # Output: frozenset({1, 2, 3})
+
+frozen.add(4)  # This will raise an AttributeError since frozenset is immutable
+print(frozen)  # Output: frozenset({1, 2, 3})
+
+'''22. CLASS & OBJECTS '''
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        return f"Hello, my name is {self.name} and I am {self.age} years old."
+person1=Person("alice", 28)
+    
+class Cars:
+    def __init__(self, model, year):
+        self.model=model
+        self.year=year
+
+# Now, outside the class, make your car and print
+my_car = Cars("Exter", 2021)
+print(f"My car is {my_car.year} from year {my_car.year}")
+
+'23. INHERITANCE'
+
+class Robot:
+    def fly(self, name):
+        print(f"{name} can fly!")
+
+class HumanoidRobot(Robot): #HumanoidRobot is child class & Robot is parent class (HumanoidRobot inherits from Robot)
+    def talk(self):
+        print(f"I can talk like humans!")
+
+# making humanoid robot 
+hero=  HumanoidRobot()
+hero.talk() # Output: I can talk like humans!
+hero.fly("Robo") # Output: Robo can fly!
+
+'24. POLYMORPHISM'
+'''Polymorphism is a big word, but it’s actually simple!
+Imagine you have lots of different toys: a robot, a car, and a dog. You want to tell all your toys to "move."
+
+1. The robot walks.
+2. The car drives.
+3. The dog runs.
+'''
+
+class Robot:
+    def move(self):
+        print("Robot walks")
+
+class Car:
+    def move(self):
+        print("Car drives")
+
+class Dog:
+    def move(self):
+        print("Dog runs")
+
+# Now, you can use them all in the same way!
+toys = [Robot(), Car(), Do      g()]
+for toy in toys:
+    toy.move()
+
+
+'24.  ABSTRACTION'
+'''Abstraction means showing only the essential features 
+and hiding the unnecessary details. It helps reduce complexity 
+and allows you to focus on what an object does, not how it does it.'''
+class RemoteControl:
+    def turn_on(self):
+        print("TV is now ON")
+remote = RemoteControl()
+remote.turn_on()  # You just press the button!
+        '''We dont always need parameters in the method or constructor because:
+        We want to focus on what the object can do, not how it does it.
+        The details (like how the toy works) are hidden inside the class.'''
+
+
+
+'25. ENCAPSULATION'
+ '''Encapsulation is a concept in object-oriented programming that hides the internal details 
+ of a class and protects data from outside access. 
+ In Python, we use private variables (with a single or double underscore _ or __)
+   to indicate that they should not be accessed directly from outside the class.'''
+
+class Person:
+    def __init__(self, name):
+        self.__name = name  # private variable
+    
+    def get_name(self):
+        return self.__name  # public method to access private variable
+
+'26. WHAT IS if __name__ == "__main__" STATEMENT USED FOR?'
+
+ '''control the execution of code in Python scripts. 
+ When a Python file is run directly, the special built-in 
+ variable __name__ is set to "__main__".However, when that file is imported as a module
+into another script, __name__ is set to the module's name instead.'''
+    '''This allows developers to write code that acts differently depending on whether it’s run directly or imported. 
+    It’s commonly used to encapsulate the script’s entry point'''
+
+    def main():
+        print("Running as a script")
+
+    if __name__ == "__main__":
+        main()
+
+
+'27. WHAT IS A defaultdict IN PYTHON?'
+  '''Normally, if you try to get a value for a key that doesnt exist in a regular dictionary, Python gives you an error.
+But with a defaultdict, if the key doesnt exist, it automatically creates it with a default value!'''
+from collections import defaultdict
+
+# Create a defaultdict with default value 0
+my_dict = defaultdict(int)
+
+my_dict["apple"] += 1  # No error! "apple" gets value 1
+print(my_dict["apple"])  # Output: 1
+print(my_dict["banana"]) # Output: 0 (created automatically)
+
+'28. HOW DOES PYTHON HANDLE MEMORY MANAGEMENT?'
+'''Automatic Memory Management (Garbage Collection)
+Python uses a built-in garbage collector that manages memory for you.
+It mainly works through:
+1. Reference Counting
+2. Generational Garbage Collection (for cyclic references)'''
+import sys
+
+a = []          # an empty list
+b = a           # another reference to the same list
+print(sys.getrefcount(a))  # count how many references point to 'a', Once no references exist, Python automatically frees the memory.
+
+'''2. Garbage Collection for Cyclic References
+Reference counting fails when objects reference each other (cycles). 
+Python’s garbage collector handles this.'''
+
+import gc
+
+class Node:
+    def __init__(self):
+        self.ref = None
+
+a = Node()
+b = Node()
+
+a.ref = b
+b.ref = a   # creates a cycle
+
+del a
+del b
+
+print(gc.collect())  # manually trigger garbage collection
+
+'''. Memory Allocation
+ Python uses a private heap space for memory allocation.
+ All Python objects and data structures are stored in this heap.
+ The Python memory manager handles the allocation of this heap space.
+ # Python also has an inbuilt memory allocator for small objects to optimize performance.
+ # This allocator manages memory in blocks of various sizes to reduce fragmentation and improve allocation speed.
+ # For larger objects, Python relies on the underlying system’s memory allocator.'''
+import sys
+
+x = 10
+y = "hello"
+z = [1, 2, 3, 4, 5]
+
+print(sys.getsizeof(x))  # memory size of integer
+print(sys.getsizeof(y))  # memory size of string
+print(sys.getsizeof(z))  # memory size of list (just container, not elements!)
+
 
