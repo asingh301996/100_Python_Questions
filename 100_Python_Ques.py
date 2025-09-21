@@ -606,3 +606,475 @@ print(sys.getsizeof(y))  # memory size of string
 print(sys.getsizeof(z))  # memory size of list (just container, not elements!)
 
 
+'29. WHAT IS A PACKAGE IN PYTHON?'
+''' package in Python is a collection of modules organized in directories.
+It allows you to group related modules together.
+A package is a folder that contains an __init__.py file,
+ which tells Python that the folder should be treated as a package. Example structure:
+  ex --- :
+mypackage/
+│
+├── __init__.py
+├── module1.py
+└── module2.py
+'''
+
+'30. WHAT IS THE PURPOSE OF __INIT__.PY IN PYTHON PACKAGES?'
+'''
+The __init__.py file in Python marks a directory as a package so that its modules can be imported. 
+Without this file, Python won’t recognize the folder as a package in older versions (though in modern Python, it’s optional).
+This file can be empty or contain initialization code for the package.
+For example, you might import key modules or define variables inside it:
+
+# __init__.py
+from .module1 import function1
+'''
+
+
+'31. EXCEPTION HANDLING IN PYTHON'
+'Exception handling in Python is done using the try, except, else, and finally blocks.'
+'This allows your program to continue running even if something goes wrong. '
+''' 1. try block contains code that might raise an error.
+    2. except block handles the error.
+    3. else runs if no error occurs.
+    4. finally always runs, useful for cleanup.'''
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+else:
+    print("No errors occurred.")
+finally:
+    print("This will always run.")
+
+
+'32.WHAT ARE PYTHON DECORATORS?'
+'''
+Step 1: What’s a function?
+A function is just some work you can ask Python to do.'''
+
+def greet():
+    print("Hello!")
+
+
+' If you call greet(), Python does the work'
+#Hello! That’s it — plain and simple.
+
+'''🟢 Step 2: What if I want to add extra work?
+Suppose every time before greeting, I want to clap my hands 👏, and after greeting, I want to say bye 👋.
+Normally, I would rewrite the function:'''
+
+def greet():
+    print("👏 Clap Clap")
+    print("Hello!")
+    print("👋 Bye Bye")
+
+'''
+But what if I don’t want to touch greet()?
+What if I want to keep it clean and reusable?
+
+🟢 Step 3: Wrapper Idea
+Instead of changing greet(), I can wrap it inside another function that adds extra work.'''
+
+def add_extras(func):
+    def wrapper():
+        print("👏 Clap Clap")   # extra work before
+        func()                 # original function
+        print("👋 Bye Bye")    # extra work after
+    return wrapper
+
+'''
+Here’s what’s happening:
+func is the function we want to decorate (like greet)
+wrapper is a new function that:
+Does extra stuff before
+Runs the real function
+Does extra stuff after
+
+🟢 Step 4: Decorating the Function
+Now we decorate greet with add_extras:'''
+
+@add_extras
+def greet():
+    print("Hello!")
+
+
+'This is the same as writing:'
+
+greet = add_extras(greet)
+
+'''🟢 Step 5: Running It
+
+When we call greet() now:'''
+
+
+
+''' Dry Run (step by step):
+
+Python sees @add_extras → replaces greet with wrapper
+We call greet() → really calling wrapper()
+wrapper() prints “Clap Clap”
+Calls the original greet() → prints “Hello!”
+Prints “ Bye Bye”
+
+Output:
+
+Clap Clap
+Hello!
+Bye Bye
+
+'''
+#func is the function we want to decorate (like greet)
+# wrapper is a new function that:
+#Does extra stuff before
+# Runs the real function
+# Does extra stuff after
+
+'33. WHAT IS THE DIFFERENCE BETWEEN A SHALLOW COPY AND A DEEP COPY?'
+'A shallow copy creates a new object, but inserts references into it to the objects found in the original.'
+'A deep copy creates a new object and recursively adds copies of nested objects found in the original.'
+import copy
+original = [1, 2, [3, 4]]
+shallow = copy.copy(original)
+deep = copy.deepcopy(original)
+shallow[2][0] = 'X'
+print(original)  # Output: [1, 2, ['X', 4]]
+print(shallow)   # Output: [1, 2, ['X', 4]]
+print(deep)      # Output: [1, 2, [3, 4]]
+
+
+'34. WHAT IS A COUNTER IN PYTHON?'
+'''A Counter is like a tally counter you use in a cricket match 🏏 or when counting chocolates 🍫.
+It counts how many times each item appears.
+'''
+#example 1
+from collections import counter 
+
+fruits= ['apple', 'banana', 'orange', 'apple', 'orange', 'banana', 'apple']
+count= counter(fruits)
+print(count)  # Output: Counter({'apple': 3, 'banana': 2, 'orange': 2})
+
+#example 2
+word = "balloon"
+letter_count = Counter(word)
+print(letter_count)
+# Output: Counter({'l': 2, 'o': 2, 'b': 1, 'a': 1, 'n': 1}) 
+
+#example 3
+from collections import Counter
+
+fruits = ["apple", "banana", "apple", "grape", "banana", "apple"]
+count = Counter(fruits)
+
+print(count.most_common())
+# Output: [('apple', 3), ('banana', 2), ('grape', 1)]
+print(count.most_common(1))   # top 1 item output: [('apple', 3)]
+print(count.most_common(2))   # top 2 items output: [('apple', 3), ('banana', 2)]
+print(count.elements())  # Output: <itertools.chain object at ...>
+
+'35. WHAT IS THE LEGB RULE IN PYTHON?'
+
+'''LEGB stands for Local → Enclosing → Global → Built-in, and it defines the order in which Python searches for variables:
+
+    - Local: Names inside the current function.
+    - Enclosing: Names in outer (but not global) functions if nested.
+    - Global: Names defined at the top-level of a script or module.
+    - Built-in: Python’s predefined names like len() or str.
+'''
+
+x = "global" # Global scope
+def outer():
+    x = "enclosing"     # Enclosing scope
+    def inner():
+        x = "local"  # Local scope
+        print(x)
+    inner()
+outer()  # prints "local"
+print(x)  # prints "global" 
+print(len("hello"))  # Built-in scope, prints 5
+# In this example:
+# The inner function prints "local" because it finds x in its local scope first.
+# The outer function has its own x, but inner() doesn’t use it.
+# The print(x) outside any function accesses the global x.
+# The len() function is a built-in function, so it’s found in the built-in scope. 
+     
+
+'36. HOW CAN YOU HANDLE FILE OPERATIONS IN PYTHON?'
+
+#Python provides easy ways to work with files using built-in functions 
+# like open(), read(), write(), and close().
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+with open("example.txt", "w") as file:
+    file.write("Hello, Python!")
+
+'37. WHAT IS METHOD RESOLUTION ORDER (MRO) IN PYTHON?'
+'Method Resolution Order (MRO) is the order in which Python looks for a method in a hierarchy of classes.'
+
+print(ClassName.__mro__) 
+
+
+class A: pass 
+class B(A): pass
+class C(A): pass
+class D(B, C): pass
+
+print(D.__mro__)
+
+'38.WHAT ARE PYTHON MAGIC METHODS?'
+
+'Magic methods are special methods in Python that start and end with double underscores (__). '
+'They allow you to define how your objects behave with built-in operations like addition,'
+' string representation, and more. By implementing these methods, '
+'you can make your custom classes work seamlessly with Pythons syntax and built-in functions.'
+#Some common magic methods are:
+'''
+    __init__: Constructor, called when an object is created.
+    __str__: Returns a string representation of the object.
+    __len__: Returns the length using len().
+    __add__: Defines behavior for + operator '''
+
+class Book:
+    def __init__(self, title):
+        self.title = title
+    def __str__(self):
+        return f"Book: {self.title}"
+book = Book("Python 101")
+print(book)  # Output: Book: Python 101
+
+'39. RECURSION IN PYTHON'
+'Recursion is when a function calls itself to solve a smaller part of a problem.'
+5!=1*2*3*4*5=120
+def factorial:
+    if n==0:
+        return 1
+    else:
+        factoriral(n-1) * n
+print(factorial(5))  # Output: 120
+'''Every recursive function must have a base case to prevent infinite recursion. 
+Python limits recursion depth by default (about 1000 calls).
+You can check it using sys.getrecursionlimit() & set it using sys.setrecursionlimit(new_limit)
+'''
+
+'39. WHAT IS PYTHON MODULES AND HOW TO CREATE THEM?'
+'''A module in Python is a file containing Python code (functions, classes, variables) that can be reused in other Python programs. 
+Modules help organize code and promote code reuse.'''
+# To create a module, simply create a Python file with a .py extension.
+# For example, create a file named math_utils.py with the following content:
+def add(a,b):
+    return a+b
+'You can use it in another file like this:'
+
+import math_utils
+print(math_utils.add(2, 3))
+
+'40. WHAT ARE WEAK REFERENCES IN PYTHON?'
+'''A weak reference is a reference to an object that does not prevent it from being garbage collected.
+This is useful when you want to reference an object without increasing its reference count,
+ allowing it to be cleaned up when no strong references exist.'''
+import weakref  
+class MyClass:
+    def __init__(self, name):
+        self.name = name    
+obj = MyClass("example")
+weak_ref = weakref.ref(obj)
+print(weak_ref())  # Output: <__main__.MyClass object at ...>
+del obj
+print(weak_ref())  # Output: None (object has been garbage collected)
+'''Weak references are often used in caching and memoization scenarios,
+ where you want to keep track of objects without preventing their cleanup.'''   
+
+'41. WHAT IS THE SUPER() FUNCTION IN PYTHON?'
+'''The super() function in Python is used to call a method from a parent class.
+It is commonly used in inheritance to access methods and properties of a base class from a derived class.'''
+class Parent:
+    def greet(self):
+        return "Hello from Parent"
+class Child(Parent):
+    def greet(self):
+        parent_greet = super().greet()  # Call the parent class method
+        return f"{parent_greet} and Child"
+child = Child()
+print(child.greet())  # Output: Hello from Parent and Child
+'''Using super() is especially useful in multiple inheritance scenarios,
+as it helps ensure that the correct method resolution order (MRO) is followed.'''
+    
+    'TYPE 1: Single Inheritance'
+class Parent:
+    def hello(self):
+        return "Hey kiddo!"
+class Child(Parent):
+    def trying_hello(self):
+        #call the parent class method
+        parent_hello = super().hello()
+        return parent_hello + "hey mamma"
+    
+child_try = Child()
+print(child_try.trying_hello())  # Output: Hey kiddo! hey mamma
+    
+    'TYPE 2: ADDING CONSTRUCTOR __INIT__ '
+class Parent:
+    def __init__(self):
+        self.toy="car"
+class Child:
+    def __init__(self):
+        super().__init__()
+        self.game="lego"
+child = Child()
+print(child.toy)  # Output: car
+print(child.game)  # Output: lego   
+
+    'TYPE 3: MULTIPLE PARENTS SUPER() HELPS
+class Mom:
+    def skills(self):
+        return "Cooking"
+
+class Dad:
+    def skills(self):
+        return "Driving"
+
+class Child(Mom, Dad):
+    def skills(self):
+        parent_skill = super().skills()
+        return parent_skill + " + Painting"
+
+c = Child()
+print(c.skills())  # Output: Cooking + Painting
+
+'42. MRO = METHOD RESOLUTION ORDER'
+'Its just the order in which Python looks for methods/attributes when you call them on an object'
+'''Child inherits from Parent
+So, when Python looks for something on Child, the MRO is:
+Child → Parent → object
+Python checked:
+“Who comes after Child in the MRO?” → That’s Parent.
+So Parent.__init__ got called.
+If Parent also had a super(), Python would continue further along the MRO.'''
+
+print(Child.__mro__) # Output : (<class '__main__.Child'>, <class '__main__.Parent'>, <class 'object'>)
+
+'43. WHAT IS COLLECTIONS.DEQUE AND WHY IS IT BETTER THAN A LIST FOR SOME USE CASES?'
+'collections.deque (double-ended queue) is a data structure that allows you to add or remove elements from both ends efficiently.'
+'deque has doubly linked list internally allowing O(1) operations on both ends'
+
+from collections import deque
+dq = deque([1, 2, 3])
+dq.appendleft(0)  # fast insert at the beginning
+dq.pop()          # fast removal from end
+'It is ideal for queue and stack implementations, sliding windows, and breadth-first searches.'
+
+
+'44.  WHAT IS THE DIFFERENCE BETWEEN @STATICMETHOD AND @CLASSMETHOD IN PYTHON?'
+'''
+'@staticmethod is a method that does not receive an implicit first argument (neither self nor cls).
+ It behaves like a regular function but belongs to the class’s namespace. 
+ It cannot access or modify class or instance state. refer pointer 32
+'''
+class MyClass:
+    @staticmethod
+    def static_method():
+        return "I am a static method"
+print(MyClass.static_method())  # Output: I am a static method
+
+'@classmethod, on the other hand, receives the class (cls) as its first argument.'
+'It can access and modify class state that applies across all instances of the class.'
+class MyClass:
+    class_variable = "I am a class variable"
+    
+    @classmethod
+    def class_method(cls):
+        return f"{cls.class_variable} accessed via class method"
+print(MyClass.class_method())  # Output: I am a class variable accessed via class method    
+
+'45. WHAT IS PYTHON ANNOTATIONS or TYPE HINT'
+
+'''Python annotations, also known as type hints,
+ are a way to specify the expected data types of function arguments and return values.'''
+example:
+def greet(name: str) -> str:
+    return f"Hello, {name}!"        
+#or 
+def add(a: int, b: int) -> int:
+    return a + b
+'In this example, the greet function expects a string argument and returns a string.'
+
+
+'46. HOW DOES EXCEPTION HANDLING WORK IN PYTHON?'
+'''
+Exception handling in Python is done using try, except, finally, and else blocks.
+ It helps your program handle unexpected errors without crashing.
+   You wrap the code that might throw an error in a try block, 
+   then use except to handle specific or general exceptions.
+'''
+try:
+    x = 1 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero.")
+finally:
+    print("This will always run.")
+else:
+    print("No errors occurred.")  # Output: Cannot divide by zero. This will always run.    
+# The finally block always runs, whether an exception occurred or not.
+# The else block runs only if no exceptions were raised in the try block.
+
+
+'47.  WHAT IS A TERNARY OPERATOR IN PYTHON?'
+'''A ternary operator in Python is a concise way to write an if-else statement in a single line.
+    It allows you to assign a value to a variable based on a condition.'''
+age = 18
+status = "Adult" if age >= 18 else "Minor"
+print(status)  # Output: Adult
+'''In this example, if age is 18 or older, status is set to "Adult"; otherwise, it is set to "Minor".'''        
+
+'48. WHAT ARE PYTHON ASSERTIONS?'
+'''Assertions are a way to test if a condition is true during development.
+ If the condition is false, an AssertionError is raised, which helps catch bugs early.'''
+x = 10
+assert x > 0, "x should be positive"  # No error, as x is positive
+assert x < 0, "x should be negative"  # Raises AssertionError: x should be negative
+'''Assertions are typically used for debugging and should not be used for regular error handling in production code.''' 
+
+'49. WHAT IS THE DIFFERENCE BETWEEN A LIST AND A TUPLE IN PYTHON?  '
+'''Lists and tuples are both used to store collections of items in Python,
+ but they have some key differences:
+1. Mutability:
+   - Lists are mutable, meaning you can change, add, or remove elements after creation.
+   - Tuples are immutable, meaning once they are created, their elements cannot be changed.
+2. Syntax:
+   - Lists are defined using square brackets [].
+   - Tuples are defined using parentheses ().
+3. Performance:
+   - Tuples are generally faster than lists for certain operations due to their immutability.'''
+# Example of a list
+my_list = [1, 2, 3]
+my_list[0] = 10  # Modifying the first element
+my_list.append(4)  # Adding an element
+print(my_list)  # Output: [10, 2, 3, 4]     
+
+# Example of a tuple
+my_tuple = (1, 2, 3)
+# my_tuple[0] = 10  # This would raise a TypeError
+# my_tuple.append(4)  # This would also raise an AttributeError
+print(my_tuple)  # Output: (1, 2, 3)
+# Tuples can be used as keys in dictionaries, while lists cannot
+my_dict = {my_tuple: "value"}
+print(my_dict)  # Output: {(1, 2, 3): 'value
+
+
+'50. WHAT IS THE WITH STATEMENT IN PYTHON AND WHY IS IT USED?'
+'''The with statement in Python is used to wrap the execution of a block of code within methods defined by a context manager.
+ It is commonly used for resource management, such as file handling, where it ensures that resources are properly acquired and released.'''
+with open("example.txt", "r") as file:
+    content = file.read()
+    print(content)  # Output: (contents of example.txt)
+'''In this example, the with statement automatically handles opening and closing the file.
+ Even if an error occurs while reading the file, it will still be closed properly.'''   
+
+    
+
+
+
+
+     
