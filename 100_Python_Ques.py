@@ -1072,9 +1072,111 @@ with open("example.txt", "r") as file:
 '''In this example, the with statement automatically handles opening and closing the file.
  Even if an error occurs while reading the file, it will still be closed properly.'''   
 
-    
+' 51. WHAT AR ETHE BENFTS OF USING PYTHON?'
+'''
+1. Easy to Learn and Use: Python has a simple syntax that is easy to read and write, making it accessible for beginners.
+2. Versatile: Python can be used for web development, data analysis, artificial intelligence, scientific computing, automation, and more.
+3. Large Standard Library: Python comes with a vast standard library that provides modules and functions for various tasks, reducing the need to write code from scratch.
+4. Strong Community Support: Python has a large and active community that contributes to a wealth of resources, tutorials, and third-party libraries.
+5. Cross-Platform: Python is available on multiple operating systems, including Windows, macOS, and Linux, allowing for easy portability of code.
+6. Integration Capabilities: Python can easily integrate with other languages and technologies, making it suitable for a wide range of applications.
+7. High Productivity: Python’s simplicity and extensive libraries enable developers to write code quickly and efficiently, leading to faster development cycles.
+8. Support for Multiple Programming Paradigms: Python supports procedural, object-oriented, and functional programming styles, providing flexibility in coding approaches.
+9. Strong in Data Science and Machine Learning: Python has become the go-to language for data science and machine learning due to libraries like NumPy, pandas, TensorFlow, and scikit-learn.
+10. Extensive Frameworks: Python has powerful frameworks like Django and Flask for web development, making it easier to build robust applications.
+''' 
+
+'52. WHAT BUILT IN DATA TYPES in PYTHON'
+'''
+1. Numeric Types: int, float, complex
+2. Sequence Types: list, tuple, range
+3. Text Type: str
+4. Set Types: set, frozenset
+5. Mapping Type: dict
+6. Boolean Type: bool
+7. Binary Types: bytes, bytearray, memoryview
+'''
 
 
+'53. HOW TO MANAGE PACKAGES IN PYTHON? '
+'''Package management in Python is typically done using tools like pip and virtual environments.'''
+# Using pip to install a package
+!pip install package_name
+# Using pip to uninstall a package
+!pip uninstall package_name
+# Creating a virtual environment
+!python -m venv myenv
+# Activating a virtual environment (Windows)'
+!myenv\Scripts\activate
+# Activating a virtual environment (macOS/Linux)
+!source myenv/bin/activate
+# Deactivating a virtual environment
+!deactivate
+'''Virtual environments help isolate project dependencies, ensuring that each project can have its own set of packages without conflicts.'''
 
+'54. HOW TO WORK WITH DATES AND TIMES IN PYTHON?'
+'''Python provides the datetime module to work with dates and times.'''
+from datetime import datetime, timedelta        
+# Getting the current date and time
+now = datetime.now()
+print(now)  # Output: Current date and time
+# Creating a specific date
+specific_date = datetime(2023, 1, 1)
+print(specific_date)  # Output: 2023-01-01 00:00:00
+# Formatting dates
+formatted_date = now.strftime("%Y-%m-%d %H:%M:%S")
+print(formatted_date)  # Output: Formatted current date and time
+# Parsing dates from strings
+parsed_date = datetime.strptime("2023-01-01", "%Y-%m-%d")
+print(parsed_date)  # Output: 2023-01-01 00:00:00
+# Date arithmetic
+tomorrow = now + timedelta(days=1)
+print(tomorrow)  # Output: Date and time for tomorrow
+yesterday = now - timedelta(days=1)
+print(yesterday)  # Output: Date and time for yesterday
+# Getting the difference between two dates
+date_diff = specific_date - now
+print(date_diff.days)  # Output: Number of days between specific_date and now   '
 
      
+' 54. What is Scope?'
+'''Python decides where to look for variables using the LEGB rule:
+Local (L) → Inside the current function.
+Enclosing (E) → In the function that wrapped around the current one.
+Global (G) → Defined at the top level of the file.
+Built-in (B) → Predefined names in Python (like len, print, max).'''
+
+x = "global"   # Global scope
+
+def outer():
+    x = "enclosing"   # Enclosing scope
+    def inner():
+        x = "local"   # Local scope
+        print(x)      # Python looks for x here first
+    inner()
+
+outer()
+print(x)  # Uses global
+print(len("hello"))  # Built-in
+
+
+'55. WHAT IS THE DIFFERENCE BETWEEN Tuple & LIST?'
+'''Lists are mutable, meaning you can change, add, or remove elements after creation.
+Tuples are immutable, meaning once they are created, their elements cannot be changed.
+Lists are defined using square brackets [].
+Tuples are defined using parentheses ().
+Tuples are generally faster than lists for certain operations due to their immutability.'''
+# Example of a list
+my_list = [1, 2, 3]
+my_list[0] = 10  # Modifying the first element
+my_list.append(4)  # Adding an element
+print(my_list)  # Output: [10, 2, 3, 4]
+
+# Example of a tuple
+my_tuple = (1, 2, 3)            
+# my_tuple[0] = 10  # This would raise a TypeError
+# my_tuple.append(4)  # This would also raise an AttributeError
+print(my_tuple)  # Output: (1, 2, 3)
+# Tuples can be used as keys in dictionaries, while lists cannot
+my_dict = {my_tuple: "value"}
+print(my_dict)  # Output: {(1, 2, 3): 'value'}  
