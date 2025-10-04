@@ -1,11 +1,31 @@
 'HOw will you count the occurrence of a specific word in a string/list ?'
+# case 1: if string 
+sentence = "apple banana apple orange apple banana"
+word = "apple"
+conv_list= sentence. split().count(word)
+print (conv_list)
 
-'''write a function to validate passwrod which meets below criteria '
-1. pwd min lenght 
-2. max lenghth 
-3. must include upper case lower case or number 
+#ANOTER METHOD
+from collections import Counter
+conv_list = sentence.split()
+word_count= Counter(conv_list)
+print(word_count)
 
-'''
+#ANOTHER METHOD WITHOUT USNG FUNCTION
+word_in_dict ={}
+sentence_list= sentence. split() #['apple','banana','apple','orange','apple','banana' ]
+
+for item in sentence_list:
+    if item in word_in_dict:
+        word_in_dict[item] += 1  # word_in_dict[item] is a key in dict and +=1 will increase the count by 1 
+    else:
+        word_in_dict[item] =1 # if key not present in dict then it will add the key and assign value 1
+
+print(word_in_dict) # {'apple': 3, 'banana': 2, 'orange': 1}
+
+
+
+
 
 '''
 given 2 strings return true if one is anagram of another 

@@ -438,6 +438,43 @@ print(frozen)  # Output: frozenset({1, 2, 3})
 frozen.add(4)  # This will raise an AttributeError since frozenset is immutable
 print(frozen)  # Output: frozenset({1, 2, 3})
 
+ set_a = {1, 2, 3}
+ set_b = {3, 4, 5}
+ 
+    # Union
+    union_result = set_a | set_b  # or use set_a.union(set_b)
+    print(union_result)  # Output: {1, 2, 3, 4, 5}
+ 
+    # Intersection
+    intersection_result = set_a & set_b  # or use set_a.intersection(set_b)
+    print(intersection_result)  # Output: {3}
+ 
+    # Difference
+    difference_result = set_a - set_b  # or use set_a.difference(set_b)
+    print(difference_result)  # Output: {1, 2}
+ 
+    # Symmetric Difference
+    symmetric_difference_result = set_a ^ set_b  # or use set_a.symmetric_difference(set_b)
+    print(symmetric_difference_result)  # Output: {1, 2, 4, 5}
+    
+
+
+    my_set = {1, 2, 3}
+ 
+    my_set.add(4)  # Add element 4 to the set
+    print(my_set)  # Output: {1, 2, 3, 4}
+ 
+    my_set.remove(2)  # Remove element 2 from the set
+    print(my_set)  # Output: {1, 3, 4}
+ 
+    my_set.discard(3)  # Remove element 3 from the set using discard
+    print(my_set)  # Output: {1, 4}
+ 
+    my_set.clear()  # Clear all elements from the set
+    print(my_set)  # Output: set()
+
+
+
 '''22. CLASS & OBJECTS '''
 class Person:
     def __init__(self, name, age):
